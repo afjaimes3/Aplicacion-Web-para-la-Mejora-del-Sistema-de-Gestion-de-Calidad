@@ -275,14 +275,13 @@ generador_docs_app/
 
 ## Estado del proyecto y próximos pasos
 
-Es un prototipo funcional de alta fidelidad, desarrollado como proyecto de grado. Incluye las pantallas, los flujos, el modelo de datos, la generación de Word y las integraciones con Gemini y Power BI.
+Es un prototipo funcional. Incluye las pantallas, los flujos, el modelo de datos, la generación de Word y las integraciones con Gemini y Power BI.
 
 Para llevarlo a producción, los pasos recomendados son:
 
 1. Migrar de SQLite a PostgreSQL o MySQL, con SQLAlchemy y Alembic para las migraciones.
 2. Desplegar con Gunicorn o uWSGI detrás de Nginx, con HTTPS.
 3. Contenerizar con Docker (`Dockerfile` multi-stage y `docker-compose.yml`).
-4. Integrar la publicación de documentos con SharePoint mediante su API. También se podría usar Google Drive o Amazon S3.
 5. Mover la generación de documentos extensos e importaciones masivas a tareas asíncronas, con Celery y Redis.
 6. Reemplazar las credenciales de demostración, sacar los secretos del código y documentar el mecanismo de sesión.
 7. Definir el DDL SQL final y documentar los endpoints HTTP.
