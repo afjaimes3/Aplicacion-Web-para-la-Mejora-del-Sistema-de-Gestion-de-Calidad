@@ -1,0 +1,161 @@
+{% extends 'base.html' %}
+
+{% block title %}Gestión de Estilos{% endblock %}
+
+{% block content %}
+<div class="content-container">
+    <div style="margin-bottom: 2rem;">
+        <h2><i class="fas fa-paint-brush"></i> Configuración de Estilos</h2>
+        <p style="color: var(--text-muted);">Personalice colores, fuentes y márgenes para la estandarización de
+            documentos.</p>
+    </div>
+
+    {% for estilo in estilos %}
+    <div
+        style="background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); margin-bottom: 2rem;">
+        <h3
+            style="border-bottom: 2px solid #eee; padding-bottom: 0.5rem; margin-bottom: 1.5rem; color: var(--primary-color);">
+            <i class="fas fa-file-alt"></i> Configuración para: {{ estilo['style_type'] }}
+        </h3>
+
+        <form method="post" action="{{ url_for('admin.gestion_estilos') }}">
+            <input type="hidden" name="style_id" value="{{ estilo['id'] }}">
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+
+                <!-- Fuentes -->
+                <div class="form-group-section">
+                    <h4 style="margin-bottom: 1rem; color: #4b5563;">Texto General</h4>
+                    <div style="display: grid; grid-template-columns: 1fr; gap: 0.5rem;">
+                        <label>Fuente</label>
+                        <input type="text" name="body_font_family" value="{{ estilo['body_font_family'] }}"
+                            class="form-control" style="width: 100%; padding: 0.5rem;">
+
+                        <label>Tamaño (pt)</label>
+                        <input type="number" name="body_font_size" value="{{ estilo['body_font_size'] }}"
+                            class="form-control" style="width: 100%; padding: 0.5rem;">
+
+                        <label>Color</label>
+                        <div style="display: flex; gap: 0.5rem;">
+                            <input type="color" name="body_font_color" value="{{ estilo['body_font_color'] }}"
+                                style="height: 38px; width: 50px; padding: 0;">
+                            <input type="text" value="{{ estilo['body_font_color'] }}" class="form-control" readonly
+                                style="width: 100px;">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group-section">
+                    <h4 style="margin-bottom: 1rem; color: #4b5563;">Títulos</h4>
+                    <div style="display: grid; grid-template-columns: 1fr; gap: 0.5rem;">
+                        <label>Fuente</label>
+                        <input type="text" name="title_font_family" value="{{ estilo['title_font_family'] }}"
+                            class="form-control" style="width: 100%; padding: 0.5rem;">
+
+                        <label>Tamaño (pt)</label>
+                        <input type="number" name="title_font_size" value="{{ estilo['title_font_size'] }}"
+                            class="form-control" style="width: 100%; padding: 0.5rem;">
+
+                        <label>Color</label>
+                        <div style="display: flex; gap: 0.5rem;">
+                            <input type="color" name="title_font_color" value="{{ estilo['title_font_color'] }}"
+                                style="height: 38px; width: 50px; padding: 0;">
+                            <input type="text" value="{{ estilo['title_font_color'] }}" class="form-control" readonly
+                                style="width: 100px;">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cabeceras Tabla -->
+                <div class="form-group-section">
+                    <h4 style="margin-bottom: 1rem; color: #4b5563;">Tablas (Encabezados)</h4>
+                    <div style="display: grid; grid-template-columns: 1fr; gap: 0.5rem;">
+                        <label>Relleno Fondo</label>
+                        <div style="display: flex; gap: 0.5rem;">
+                            <input type="color" name="table_header_fill" value="{{ estilo['table_header_fill'] }}"
+                                style="height: 38px; width: 50px; padding: 0;">
+                            <input type="text" value="{{ estilo['table_header_fill'] }}" class="form-control" readonly
+                                style="width: 100px;">
+                        </div>
+
+                        <label>Color Texto</label>
+                        <div style="display: flex; gap: 0.5rem;">
+                            <input type="color" name="table_header_text_color"
+                                value="{{ estilo['table_header_text_color'] }}"
+                                style="height: 38px; width: 50px; padding: 0;">
+                            <input type="text" value="{{ estilo['table_header_text_color'] }}" class="form-control"
+                                readonly style="width: 100px;">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Celdas Especiales -->
+                <div class="form-group-section">
+                    <h4 style="margin-bottom: 1rem; color: #4b5563;">Celda Código (Header)</h4>
+                    <div style="display: grid; grid-template-columns: 1fr; gap: 0.5rem;">
+                        <label>Relleno Fondo</label>
+                        <div style="display: flex; gap: 0.5rem;">
+                            <input type="color" name="header_code_fill" value="{{ estilo['header_code_fill'] }}"
+                                style="height: 38px; width: 50px; padding: 0;">
+                            <input type="text" value="{{ estilo['header_code_fill'] }}" class="form-control" readonly
+                                style="width: 100px;">
+                        </div>
+
+                        <label>Color Texto</label>
+                        <div style="display: flex; gap: 0.5rem;">
+                            <input type="color" name="header_code_text_color"
+                                value="{{ estilo['header_code_text_color'] }}"
+                                style="height: 38px; width: 50px; padding: 0;">
+                            <input type="text" value="{{ estilo['header_code_text_color'] }}" class="form-control"
+                                readonly style="width: 100px;">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Márgenes -->
+                <div class="form-group-section">
+                    <h4 style="margin-bottom: 1rem; color: #4b5563;">Márgenes (cm)</h4>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                        <div>
+                            <label>Superior</label>
+                            <input type="number" step="0.1" name="margin_top" value="{{ estilo['margin_top'] }}"
+                                class="form-control" style="width: 100%; padding: 0.5rem;">
+                        </div>
+                        <div>
+                            <label>Inferior</label>
+                            <input type="number" step="0.1" name="margin_bottom" value="{{ estilo['margin_bottom']}}"
+                                class="form-control" style="width: 100%; padding: 0.5rem;">
+                        </div>
+                        <div>
+                            <label>Izquierdo</label>
+                            <input type="number" step="0.1" name="margin_left" value="{{ estilo['margin_left'] }}"
+                                class="form-control" style="width: 100%; padding: 0.5rem;">
+                        </div>
+                        <div>
+                            <label>Derecho</label>
+                            <input type="number" step="0.1" name="margin_right" value="{{ estilo['margin_right'] }}"
+                                class="form-control" style="width: 100%; padding: 0.5rem;">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div
+                style="margin-top: 2rem; border-top: 1px solid #eee; padding-top: 1rem; display: flex; justify-content: flex-end;">
+                <button type="submit" class="btn-primary" style="padding: 0.75rem 1.5rem; font-size: 1rem;">
+                    <i class="fas fa-save"></i> Guardar Cambios
+                </button>
+            </div>
+        </form>
+    </div>
+    {% endfor %}
+
+    <div style="margin-top: 2rem;">
+        <!-- Assume there is a way to go back to admin menu, or just use back button -->
+        <a href="{{ url_for('menu.admin_menu') }}" class="btn-secondary">
+            <i class="fas fa-arrow-left"></i> Volver (Menú)
+        </a>
+    </div>
+</div>
+{% endblock %}

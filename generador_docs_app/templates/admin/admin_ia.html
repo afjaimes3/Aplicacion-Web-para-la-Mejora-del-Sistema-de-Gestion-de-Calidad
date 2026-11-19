@@ -1,0 +1,250 @@
+{% extends 'base.html' %}
+
+{% block title %}Administrar IA{% endblock %}
+
+{% block content %}
+<div class="content-container">
+    <div style="margin-bottom: 2rem;">
+        <h2><i class="fas fa-robot"></i> Configuración de Inteligencia Artificial</h2>
+        <p style="color: var(--text-muted);">Defina las instrucciones y el comportamiento del asistente IA para cada
+            sección del documento.</p>
+    </div>
+
+    <!-- Tabs for Document Types -->
+    <div class="tabs-container" style="margin-bottom: 2rem;">
+        <div class="tabs-header"
+            style="display: flex; gap: 0.5rem; border-bottom: 2px solid #e2e8f0; padding-bottom: 2px; overflow-x: auto;">
+            {% for t in tipos %}
+            <button class="tab-btn {% if request.args.get('tab', 'PR') == t.codigo %}active{% endif %}"
+                onclick="window.location.href='?tab={{ t.codigo }}'"
+                style="padding: 0.75rem 1.5rem; border: none; background: none; font-weight: 600; cursor: pointer; color: #64748b; border-bottom: 2px solid transparent; transition: all 0.2s; white-space: nowrap;">
+                {{ t.nombre }}
+            </button>
+            {% endfor %}
+        </div>
+    </div>
+
+    {% set active_tab = request.args.get('tab', 'PR') %}
+
+    <div
+        style="background: white; border-radius: 12px; border: 1px solid #e2e8f0; padding: 2rem; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); margin-bottom: 2rem;">
+        <form action="{{ url_for('admin_ia.save_global') }}" method="post"
+            style="display: flex; align-items: center; justify-content: space-between;">
+            <div>
+                <h3 style="margin: 0; color: #1e293b;"><i class="fas fa-power-off"></i> Interruptor Maestro</h3>
+                <p style="margin: 0.5rem 0 0; color: #64748b;">Apagar o encender las funciones de IA en toda la
+                    aplicación.</p>
+            </div>
+            <div style="display: flex; align-items: center; gap: 1rem;">
+                <label class="switch">
+                    <input type="checkbox" name="enable_ia_global" {% if enable_ia_global %}checked{% endif %}
+                        onchange="this.form.submit()">
+                    <span class="slider round"></span>
+                </label>
+                <span style="font-weight: 600; color: {% if enable_ia_global %}#16a34a{% else %}#ef4444{% endif %}">
+                    {% if enable_ia_global %}ACTIVADO{% else %}DESACTIVADO{% endif %}
+                </span>
+            </div>
+        </form>
+    </div>
+
+    <div class="tab-content"
+        style="background: white; border-radius: 12px; border: 1px solid #e2e8f0; padding: 2rem; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);">
+        <h3 style="margin-top: 0; color: #1e293b;">Prompts para: {{ active_tab }}</h3>
+
+        {% if active_tab in ['PR', 'DI'] %}
+        <div style="display: flex; flex-direction: column; gap: 2rem;">
+            {% for sec in secciones %}
+            {% set p = prompts.get(active_tab, {}).get(sec.id) %}
+            <form action="{{ url_for('admin_ia.save') }}" method="post"
+                style="padding-bottom: 2rem; border-bottom: 1px solid #f1f5f9;">
+                <input type="hidden" name="tipo_documento" value="{{ active_tab }}">
+                <input type="hidden" name="seccion" value="{{ sec.id }}">
+
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                    <div style="display: flex; align-items: center; gap: 1rem;">
+                        <h4 style="margin: 0; color: #334155;"><i class="fas fa-chevron-right"
+                                style="font-size: 0.8rem; color: #7c3aed;"></i> {{ sec.nombre }}</h4>
+                        <!-- Per section switch -->
+                        <label class="switch-small">
+                            <!-- Default to checked if p is None (new prompts implied active) or p['activo'] is 1 -->
+                            <input type="checkbox" name="activo" {% if not p or p.activo %}checked{% endif %}>
+                            <span class="slider-small round"></span>
+                        </label>
+                    </div>
+
+                    <button type="submit" class="btn-primary"
+                        style="padding: 0.5rem 1rem; font-size: 0.85rem; background-color: #7c3aed; border-color: #7c3aed;">
+                        <i class="fas fa-save"></i> Guardar
+                    </button>
+                </div>
+
+                <div class="form-grid-ia" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+                    <div class="form-group">
+                        <label
+                            style="display: block; font-size: 0.85rem; font-weight: 700; color: #64748b; margin-bottom: 0.5rem;">Prompt
+                            de Sistema (Contexto base)</label>
+                        <textarea name="prompt_sistema" class="form-control"
+                            style="height: 180px; font-family: monospace; font-size: 0.9rem; border-color: #cbd5e1;">{{ p.prompt_sistema if p else '' }}</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label
+                            style="display: block; font-size: 0.85rem; font-weight: 700; color: #64748b; margin-bottom: 0.5rem;">Instrucciones
+                            Específicas</label>
+                        <textarea name="prompt_instrucciones" class="form-control"
+                            style="height: 180px; font-family: monospace; font-size: 0.9rem; border-color: #cbd5e1;">{{ p.prompt_instrucciones if p else '' }}</textarea>
+                    </div>
+                </div>
+            </form>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div style="text-align: center; padding: 4rem 2rem; color: #64748b;">
+            <i class="fas fa-tools" style="font-size: 4rem; margin-bottom: 1.5rem; color: #e2e8f0;"></i>
+            <h3>Secciones no implementadas</h3>
+            <p>La personalización de prompts para <strong>{{ active_tab }}</strong> aún no está disponible.</p>
+            <p style="font-size: 0.9rem; margin-top: 1rem;">Solo los tipos <strong>PR (Procedimiento)</strong> y
+                <strong>DI (Documento Institucional)</strong> permiten edición de momento.
+            </p>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+<style>
+    .tab-btn.active {
+        color: #7c3aed !important;
+        border-bottom-color: #7c3aed !important;
+        background-color: #f5f3ff !important;
+    }
+
+    .tab-btn:hover:not(.active) {
+        color: #1e293b;
+        background-color: #f8fafc;
+    }
+
+    textarea:focus {
+        border-color: #7c3aed !important;
+        box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.1) !important;
+    }
+
+    @media (max-width: 900px) {
+        .form-grid-ia {
+            grid-template-columns: 1fr !important;
+        }
+    }
+
+    /* Toggle Switch Styles */
+    .switch {
+        position: relative;
+        display: inline-block;
+        width: 60px;
+        height: 34px;
+    }
+
+    .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+
+    .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        -webkit-transition: .4s;
+        transition: .4s;
+    }
+
+    .slider:before {
+        position: absolute;
+        content: "";
+        height: 26px;
+        width: 26px;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        -webkit-transition: .4s;
+        transition: .4s;
+    }
+
+    input:checked+.slider {
+        background-color: #16a34a;
+    }
+
+    input:focus+.slider {
+        box-shadow: 0 0 1px #16a34a;
+    }
+
+    input:checked+.slider:before {
+        -webkit-transform: translateX(26px);
+        -ms-transform: translateX(26px);
+        transform: translateX(26px);
+    }
+
+    /* Rounded sliders */
+    .slider.round {
+        border-radius: 34px;
+    }
+
+    .slider.round:before {
+        border-radius: 50%;
+    }
+
+    /* Small Switch */
+    .switch-small {
+        position: relative;
+        display: inline-block;
+        width: 40px;
+        height: 20px;
+    }
+
+    .switch-small input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+
+    .slider-small {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        transition: .4s;
+    }
+
+    .slider-small:before {
+        position: absolute;
+        content: "";
+        height: 16px;
+        width: 16px;
+        left: 2px;
+        bottom: 2px;
+        background-color: white;
+        transition: .4s;
+    }
+
+    input:checked+.slider-small {
+        background-color: #7c3aed;
+    }
+
+    input:checked+.slider-small:before {
+        transform: translateX(20px);
+    }
+
+    .slider-small.round {
+        border-radius: 20px;
+    }
+
+    .slider-small.round:before {
+        border-radius: 50%;
+    }
+</style>
+{% endblock %}

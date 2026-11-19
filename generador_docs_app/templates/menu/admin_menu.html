@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block title %}Menú Admin{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div style="margin-bottom: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 1rem;">
+        <h2 style="font-weight: 700; color: var(--text-color);">Panel de Administración</h2>
+        <p style="color: var(--text-muted);">Gestione el sistema y genere documentos desde aquí.</p>
+    </div>
+
+    <div class="menu-grid">
+        <a href="{{ url_for('documents.formulario') }}" class="menu-item">
+            <i class="fas fa-file-contract"></i>
+            <h3>Nuevo Documento</h3>
+            <p>Acceder a la herramienta de generación.</p>
+        </a>
+        <a href="{{ url_for('admin.gestion_usuarios') }}" class="menu-item">
+            <i class="fas fa-users-cog"></i>
+            <h3>Gestionar Usuarios</h3>
+            <p>Crear, editar o desactivar usuarios.</p>
+        </a>
+        <a href="{{ url_for('admin.gestion_nomenclaturas') }}" class="menu-item">
+            <i class="fas fa-cubes"></i>
+            <h3>Gestionar Nomenclaturas</h3>
+            <p>Procesos, subprocesos y documentos.</p>
+        </a>
+        <a href="{{ url_for('gestion_maestros.index_formatos') }}" class="menu-item">
+            <i class="fas fa-file-alt"></i>
+            <h3>Maestro de Formatos</h3>
+            <p>Lista maestra de todos los formatos registrados.</p>
+        </a>
+        <a href="{{ url_for('gestion_maestros.index_documentos') }}" class="menu-item">
+            <i class="fas fa-file-invoice"></i>
+            <h3>Maestro de Documentos</h3>
+            <p>Lista maestra de todos los documentos oficiales.</p>
+        </a>
+        <a href="{{ url_for('menu.descargas') }}" class="menu-item">
+            <i class="fas fa-download"></i>
+            <h3>Descargar Plantillas</h3>
+            <p>Repositorio de plantillas base.</p>
+        </a>
+        <a href="{{ url_for('admin_ia.index') }}" class="menu-item"
+            style="border-color: #7c3aed; background: linear-gradient(135deg, #f5f3ff 0%, #ffffff 100%);">
+            <i class="fas fa-robot" style="color: #7c3aed;"></i>
+            <h3>Administrar IA</h3>
+            <p>Configurar prompts y comportamiento de la IA.</p>
+        </a>
+        <a href="{{ url_for('admin.gestion_estilos') }}" class="menu-item">
+            <i class="fas fa-paint-brush"></i>
+            <h3>Gestionar Estilos</h3>
+            <p>Configurar fuentes, colores y márgenes.</p>
+        </a>
+        <a href="{{ url_for('standardizer.estandarizar') }}" class="menu-item">
+            <i class="fas fa-magic"></i>
+            <h3>Estandarizador</h3>
+            <p>Aplicar estilos a documentos existentes.</p>
+        </a>
+    </div>
+</div>
+{% endblock %}

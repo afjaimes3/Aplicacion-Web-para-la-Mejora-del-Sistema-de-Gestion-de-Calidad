@@ -1,0 +1,10 @@
+Flask
+docx-mailmerge
+python-dotenv
+google-generativeai
+requests
+pandas
+openpyxl
+gunicorn
+python-docx
+lxml

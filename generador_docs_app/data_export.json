@@ -1,0 +1,766 @@
+{
+  "personal": [
+    {
+      "id": 1,
+      "nombre": "Juan Pérez",
+      "cargo": "Director de Operaciones"
+    },
+    {
+      "id": 2,
+      "nombre": "María Gómez",
+      "cargo": "Coordinadora de Calidad"
+    },
+    {
+      "id": 3,
+      "nombre": "Carlos López",
+      "cargo": "Especialista en Procesos"
+    },
+    {
+      "id": 4,
+      "nombre": "Laura Martínez",
+      "cargo": "Directora de Talento Humano"
+    }
+  ],
+  "documentos": [],
+  "tipos_documento": [
+    {
+      "codigo": "PR",
+      "nombre": "Procedimiento"
+    },
+    {
+      "codigo": "DI",
+      "nombre": "Documento Institucional"
+    },
+    {
+      "codigo": "IN",
+      "nombre": "Instructivo"
+    },
+    {
+      "codigo": "FR",
+      "nombre": "Formato"
+    }
+  ],
+  "procesos": [
+    {
+      "codigo": "AS",
+      "nombre": "Aseguramiento de la Calidad Académica"
+    },
+    {
+      "codigo": "DI",
+      "nombre": "Direccionamiento Institucional"
+    },
+    {
+      "codigo": "GA",
+      "nombre": "Gestión Administrativa"
+    },
+    {
+      "codigo": "GC",
+      "nombre": "Gestión Artística y Cultural"
+    },
+    {
+      "codigo": "GF",
+      "nombre": "Gestión Financiera"
+    },
+    {
+      "codigo": "GH",
+      "nombre": "Gestión del Talento Humano"
+    },
+    {
+      "codigo": "GI",
+      "nombre": "Gestión Integral"
+    },
+    {
+      "codigo": "GJ",
+      "nombre": "Gestión Jurídica"
+    },
+    {
+      "codigo": "GM",
+      "nombre": "Gestión del Medio Universitario"
+    },
+    {
+      "codigo": "GP",
+      "nombre": "Gestión de Comunicaciones"
+    },
+    {
+      "codigo": "GS",
+      "nombre": "Gestión de Soporte Académico"
+    },
+    {
+      "codigo": "GT",
+      "nombre": "Gestión de TI"
+    },
+    {
+      "codigo": "PD",
+      "nombre": "Docencia"
+    },
+    {
+      "codigo": "PI",
+      "nombre": "Investigación"
+    },
+    {
+      "codigo": "PS",
+      "nombre": "Proyección Social"
+    },
+    {
+      "codigo": "RI",
+      "nombre": "Relaciones Interinstitucionales"
+    }
+  ],
+  "subprocesos": [
+    {
+      "id": 1,
+      "codigo_proceso": "DI",
+      "codigo": "E",
+      "nombre": "Direccionamiento Estratégico"
+    },
+    {
+      "id": 2,
+      "codigo_proceso": "DI",
+      "codigo": "P",
+      "nombre": "Presupuesto Institucional"
+    },
+    {
+      "id": 3,
+      "codigo_proceso": "RI",
+      "codigo": "C",
+      "nombre": "Cancillería"
+    },
+    {
+      "id": 4,
+      "codigo_proceso": "AS",
+      "codigo": "A",
+      "nombre": "Autoevaluación"
+    },
+    {
+      "id": 5,
+      "codigo_proceso": "AS",
+      "codigo": "E",
+      "nombre": "Evaluación"
+    },
+    {
+      "id": 6,
+      "codigo_proceso": "AS",
+      "codigo": "I",
+      "nombre": "Información"
+    },
+    {
+      "id": 7,
+      "codigo_proceso": "AS",
+      "codigo": "R",
+      "nombre": "Registro Calificado"
+    },
+    {
+      "id": 8,
+      "codigo_proceso": "GI",
+      "codigo": "C",
+      "nombre": "Administración del SGC"
+    },
+    {
+      "id": 9,
+      "codigo_proceso": "GI",
+      "codigo": "A",
+      "nombre": "Administración del SGA"
+    },
+    {
+      "id": 10,
+      "codigo_proceso": "PD",
+      "codigo": "G",
+      "nombre": "Gestión de Programas"
+    },
+    {
+      "id": 11,
+      "codigo_proceso": "PD",
+      "codigo": "P",
+      "nombre": "Gestión Académica"
+    },
+    {
+      "id": 12,
+      "codigo_proceso": "PD",
+      "codigo": "O",
+      "nombre": "Otorgamiento de Estímulos y Distinciones"
+    },
+    {
+      "id": 13,
+      "codigo_proceso": "PI",
+      "codigo": "I",
+      "nombre": "Investigación Formal"
+    },
+    {
+      "id": 14,
+      "codigo_proceso": "PI",
+      "codigo": "F",
+      "nombre": "Formación Investigativa"
+    },
+    {
+      "id": 15,
+      "codigo_proceso": "PI",
+      "codigo": "G",
+      "nombre": "Gestión del Capital Humano, Intelectual y Relacional"
+    },
+    {
+      "id": 16,
+      "codigo_proceso": "PI",
+      "codigo": "L",
+      "nombre": "Laboratorios"
+    },
+    {
+      "id": 17,
+      "codigo_proceso": "PS",
+      "codigo": "R",
+      "nombre": "Publicaciones Institucionales"
+    },
+    {
+      "id": 18,
+      "codigo_proceso": "PS",
+      "codigo": "E",
+      "nombre": "Programas de Extensión y Proyectos Especiales"
+    },
+    {
+      "id": 19,
+      "codigo_proceso": "PS",
+      "codigo": "A",
+      "nombre": "Atención Psicológica"
+    },
+    {
+      "id": 20,
+      "codigo_proceso": "PS",
+      "codigo": "G",
+      "nombre": "Graduados"
+    },
+    {
+      "id": 21,
+      "codigo_proceso": "PS",
+      "codigo": "P",
+      "nombre": "Prácticas Profesionales"
+    },
+    {
+      "id": 22,
+      "codigo_proceso": "GS",
+      "codigo": "A",
+      "nombre": "Admisiones"
+    },
+    {
+      "id": 23,
+      "codigo_proceso": "GS",
+      "codigo": "R",
+      "nombre": "Registro Académico"
+    },
+    {
+      "id": 24,
+      "codigo_proceso": "GS",
+      "codigo": "V",
+      "nombre": "Educación Virtual"
+    },
+    {
+      "id": 25,
+      "codigo_proceso": "GS",
+      "codigo": "B",
+      "nombre": "Biblioteca"
+    },
+    {
+      "id": 26,
+      "codigo_proceso": "GA",
+      "codigo": "C",
+      "nombre": "Compras"
+    },
+    {
+      "id": 27,
+      "codigo_proceso": "GA",
+      "codigo": "S",
+      "nombre": "Servicios Generales"
+    },
+    {
+      "id": 28,
+      "codigo_proceso": "GA",
+      "codigo": "V",
+      "nombre": "Protección de Recursos"
+    },
+    {
+      "id": 29,
+      "codigo_proceso": "GA",
+      "codigo": "P",
+      "nombre": "Planta Física - Infraestructura"
+    },
+    {
+      "id": 30,
+      "codigo_proceso": "GA",
+      "codigo": "E",
+      "nombre": "Gestión de Eventos"
+    },
+    {
+      "id": 31,
+      "codigo_proceso": "GA",
+      "codigo": "A",
+      "nombre": "Administración General"
+    },
+    {
+      "id": 32,
+      "codigo_proceso": "GF",
+      "codigo": "A",
+      "nombre": "Activos Fijos"
+    },
+    {
+      "id": 33,
+      "codigo_proceso": "GF",
+      "codigo": "C",
+      "nombre": "Gestión Contable"
+    },
+    {
+      "id": 34,
+      "codigo_proceso": "GF",
+      "codigo": "T",
+      "nombre": "Tesorería"
+    },
+    {
+      "id": 35,
+      "codigo_proceso": "GF",
+      "codigo": "R",
+      "nombre": "Cartera"
+    },
+    {
+      "id": 36,
+      "codigo_proceso": "GF",
+      "codigo": "F",
+      "nombre": "Administración de Gestión Financiera"
+    },
+    {
+      "id": 37,
+      "codigo_proceso": "GH",
+      "codigo": "A",
+      "nombre": "Administración del Talento Humano"
+    },
+    {
+      "id": 38,
+      "codigo_proceso": "GH",
+      "codigo": "S",
+      "nombre": "Selección"
+    },
+    {
+      "id": 39,
+      "codigo_proceso": "GH",
+      "codigo": "C",
+      "nombre": "Contratación"
+    },
+    {
+      "id": 40,
+      "codigo_proceso": "GH",
+      "codigo": "N",
+      "nombre": "Nómina"
+    },
+    {
+      "id": 41,
+      "codigo_proceso": "GH",
+      "codigo": "D",
+      "nombre": "Desarrollo Humano y Organizacional (DHO)"
+    },
+    {
+      "id": 42,
+      "codigo_proceso": "GH",
+      "codigo": "T",
+      "nombre": "Seguridad y Salud en el Trabajo"
+    },
+    {
+      "id": 43,
+      "codigo_proceso": "GH",
+      "codigo": "I",
+      "nombre": "Inducción"
+    },
+    {
+      "id": 44,
+      "codigo_proceso": "GT",
+      "codigo": "A",
+      "nombre": "Administración de Gestión de TI"
+    },
+    {
+      "id": 45,
+      "codigo_proceso": "GT",
+      "codigo": "I",
+      "nombre": "Infraestructura"
+    },
+    {
+      "id": 46,
+      "codigo_proceso": "GT",
+      "codigo": "S",
+      "nombre": "Seguridad Informática"
+    },
+    {
+      "id": 47,
+      "codigo_proceso": "GT",
+      "codigo": "P",
+      "nombre": "Aplicaciones"
+    },
+    {
+      "id": 48,
+      "codigo_proceso": "GT",
+      "codigo": "T",
+      "nombre": "Soporte Técnico"
+    },
+    {
+      "id": 49,
+      "codigo_proceso": "GM",
+      "codigo": "A",
+      "nombre": "Administración del Gestión del Medio Universitario"
+    },
+    {
+      "id": 50,
+      "codigo_proceso": "GM",
+      "codigo": "B",
+      "nombre": "Bienestar Institucional"
+    },
+    {
+      "id": 51,
+      "codigo_proceso": "GM",
+      "codigo": "C",
+      "nombre": "Consejería Académica"
+    },
+    {
+      "id": 52,
+      "codigo_proceso": "GM",
+      "codigo": "G",
+      "nombre": "Grados"
+    },
+    {
+      "id": 53,
+      "codigo_proceso": "GM",
+      "codigo": "S",
+      "nombre": "Salud"
+    },
+    {
+      "id": 54,
+      "codigo_proceso": "GP",
+      "codigo": "A",
+      "nombre": "Administración de Gestión de Comunicaciones"
+    },
+    {
+      "id": 55,
+      "codigo_proceso": "GP",
+      "codigo": "E",
+      "nombre": "Cubrimiento de Eventos"
+    },
+    {
+      "id": 56,
+      "codigo_proceso": "GP",
+      "codigo": "P",
+      "nombre": "Página Web"
+    },
+    {
+      "id": 57,
+      "codigo_proceso": "GP",
+      "codigo": "V",
+      "nombre": "Videos"
+    },
+    {
+      "id": 58,
+      "codigo_proceso": "GP",
+      "codigo": "R",
+      "nombre": "Redes Sociales"
+    },
+    {
+      "id": 59,
+      "codigo_proceso": "GP",
+      "codigo": "D",
+      "nombre": "Promoción y Divulgación"
+    },
+    {
+      "id": 60,
+      "codigo_proceso": "GJ",
+      "codigo": "J",
+      "nombre": "Asesoría Jurídica"
+    },
+    {
+      "id": 61,
+      "codigo_proceso": "GJ",
+      "codigo": "A",
+      "nombre": "Administración de la Gestión Jurídica"
+    },
+    {
+      "id": 62,
+      "codigo_proceso": "GJ",
+      "codigo": "Q",
+      "nombre": "FPQRS"
+    },
+    {
+      "id": 63,
+      "codigo_proceso": "GC",
+      "codigo": "A",
+      "nombre": "Administración de la Gestión Artística y Cultural"
+    }
+  ],
+  "usuarios": [
+    {
+      "id": 1,
+      "username": "admin",
+      "password_hash": "scrypt:32768:8:1$hYIPAzJqAU4eCGlV$0fb2994e751bb93954b5ca39ec2c941fec457cb7a7e016438b5e78e6df3fb9ef5598914c42568875c7033dec29e720ed8e251bf16098bbdb5601fec5e0aeff03",
+      "nombre_completo": "Administrador del Sistema",
+      "email": "admin@example.com",
+      "rol": "admin",
+      "activo": 1,
+      "fecha_creacion": "2026-11-17 22:14:03",
+      "ultimo_acceso": null
+    },
+    {
+      "id": 2,
+      "username": "usuario",
+      "password_hash": "scrypt:32768:8:1$KjKAVLeGfyNef6fq$32c23c6c2ff1696d6db1ebaf981c3dcb09f728c4a3b05f3551d7311146b45462ba980f6adbf085febbe57a6b07db68889deb5d47ef7d4bd31f4db45e884d50e2",
+      "nombre_completo": "Usuario Demostración",
+      "email": "usuario@example.com",
+      "rol": "user",
+      "activo": 1,
+      "fecha_creacion": "2026-11-17 22:14:03",
+      "ultimo_acceso": null
+    }
+  ],
+  "lista_formatos": [
+    {
+      "id": 1,
+      "codigo": "FR-GA-A-501",
+      "nombre": "Formato Solicitud de Pedido",
+      "macroproceso": "Procesos de Soporte/Apoyo",
+      "proceso": "GA",
+      "subproceso": "A",
+      "version": "1.0",
+      "fecha_actualizacion": "2025-01-01",
+      "fecha_caducidad": "2028-12-31",
+      "estado": "Activo",
+      "url_sharepoint": null
+    },
+    {
+      "id": 2,
+      "codigo": "FR-GH-T-502",
+      "nombre": "Formato Evaluación de Desempeño",
+      "macroproceso": "Procesos de Soporte/Apoyo",
+      "proceso": "GH",
+      "subproceso": "T",
+      "version": "1.0",
+      "fecha_actualizacion": "2025-01-01",
+      "fecha_caducidad": "2028-12-31",
+      "estado": "Activo",
+      "url_sharepoint": null
+    },
+    {
+      "id": 3,
+      "codigo": "FR-GT-S-503",
+      "nombre": "Formato Reporte de Incidentes de TI",
+      "macroproceso": "Procesos de Soporte/Apoyo",
+      "proceso": "GT",
+      "subproceso": "S",
+      "version": "1.0",
+      "fecha_actualizacion": "2025-01-01",
+      "fecha_caducidad": "2029-01-01",
+      "estado": "Activo",
+      "url_sharepoint": null
+    },
+    {
+      "id": 4,
+      "codigo": "FR-GI-C-504",
+      "nombre": "Formato Control de Cambios Documentales",
+      "macroproceso": "Procesos Estratégicos",
+      "proceso": "GI",
+      "subproceso": "C",
+      "version": "1.0",
+      "fecha_actualizacion": "2025-01-01",
+      "fecha_caducidad": "2028-06-30",
+      "estado": "Activo",
+      "url_sharepoint": null
+    },
+    {
+      "id": 5,
+      "codigo": "FR-GI-C-505",
+      "nombre": "Formato Lista de Asistencia a Capacitación",
+      "macroproceso": "Procesos Estratégicos",
+      "proceso": "GI",
+      "subproceso": "C",
+      "version": "1.0",
+      "fecha_actualizacion": "2025-01-01",
+      "fecha_caducidad": "2028-06-30",
+      "estado": "Activo",
+      "url_sharepoint": null
+    }
+  ],
+  "lista_documentos": [
+    {
+      "id": 1,
+      "tipo_documento": "PR",
+      "codigo": "PR-GA-A-101",
+      "nombre": "Procedimiento de Gestión de Compras",
+      "macroproceso": "Procesos de Soporte/Apoyo",
+      "proceso": "GA",
+      "subproceso": "A",
+      "version_actual": "1.0",
+      "fecha_caducidad": "2028-12-31",
+      "responsable_lider": "Líder de Compras",
+      "url_sharepoint": null
+    },
+    {
+      "id": 2,
+      "tipo_documento": "PR",
+      "codigo": "PR-GH-T-102",
+      "nombre": "Procedimiento de Inducción de Personal",
+      "macroproceso": "Procesos de Soporte/Apoyo",
+      "proceso": "GH",
+      "subproceso": "T",
+      "version_actual": "2.0",
+      "fecha_caducidad": "2028-12-31",
+      "responsable_lider": "Líder de Talento",
+      "url_sharepoint": null
+    },
+    {
+      "id": 3,
+      "tipo_documento": "PR",
+      "codigo": "PR-GT-S-103",
+      "nombre": "Procedimiento de Respaldo y Recuperación",
+      "macroproceso": "Procesos de Soporte/Apoyo",
+      "proceso": "GT",
+      "subproceso": "S",
+      "version_actual": "1.0",
+      "fecha_caducidad": "2029-01-01",
+      "responsable_lider": "Líder de TI",
+      "url_sharepoint": null
+    },
+    {
+      "id": 4,
+      "tipo_documento": "DI",
+      "codigo": "DI-DI-E-801",
+      "nombre": "Manual del Sistema de Gestión de Calidad",
+      "macroproceso": "Procesos Estratégicos",
+      "proceso": "DI",
+      "subproceso": "E",
+      "version_actual": "1.0",
+      "fecha_caducidad": "2029-01-01",
+      "responsable_lider": "Coordinador de Calidad",
+      "url_sharepoint": null
+    },
+    {
+      "id": 5,
+      "tipo_documento": "IN",
+      "codigo": "IN-GI-C-201",
+      "nombre": "Instructivo para el Control de Documentos",
+      "macroproceso": "Procesos Estratégicos",
+      "proceso": "GI",
+      "subproceso": "C",
+      "version_actual": "1.0",
+      "fecha_caducidad": "2028-06-30",
+      "responsable_lider": "Coordinador de Calidad",
+      "url_sharepoint": null
+    }
+  ],
+  "config_prompts": [
+    {
+      "id": 1,
+      "tipo_documento": "PR",
+      "seccion": "objetivo",
+      "prompt_sistema": "Actúa como un experto en redacción técnica, gestión de procesos y normas ISO de calidad. Tu tarea es corregir, completar y mejorar el texto proporcionado para un documento institucional. El idioma debe ser siempre ESPAÑOL.\r\n\r\nEstructura institucional jerárquica (referencial, no exhaustiva):\r\nNivel 1: Consejo Superior.\r\nNivel 2: Rectoría.\r\nNivel 3: Secretaría General; Consejos/Comités; Vicerrectoría Académica e Investigación; Vicerrectoría Administrativa y Financiera; Cancillería; Educación Digital/Virtual; Dirección Artística y Cultural.\r\nNivel 4: Dependencias internas de cada unidad.\r\nNota: Respeta siempre estas jerarquías en la redacción, mencionando primero a los niveles superiores.\r\nIMPORTANTE: Devuelve SOLAMENTE el resultado solicitado. No incluyas meta-comentarios, saludos, introducciones ni repitas estas instrucciones.",
+      "prompt_instrucciones": "Completa la idea si parece cortada. Corrige ortografía y gramática. Mejora el tono para que sea formal e institucional. Devuelve SOLAMENTE el texto mejorado.",
+      "activo": 1
+    },
+    {
+      "id": 2,
+      "tipo_documento": "PR",
+      "seccion": "responsables",
+      "prompt_sistema": "Actúa como un experto en redacción técnica, gestión de procesos y normas ISO de calidad. Tu tarea es corregir, completar y mejorar el texto proporcionado para un documento institucional. El idioma debe ser siempre ESPAÑOL.\n\nEstructura institucional jerárquica (referencial, no exhaustiva):\nNivel 1: Consejo Superior.\nNivel 2: Rectoría.\nNivel 3: Secretaría General; Consejos/Comités; Vicerrectoría Académica e Investigación; Vicerrectoría Administrativa y Financiera; Cancillería; Educación Digital/Virtual; Dirección Artística y Cultural.\nNivel 4: Dependencias internas de cada unidad.\nNota: Respeta siempre estas jerarquías en la redacción, mencionando primero a los niveles superiores.\nIMPORTANTE: Devuelve SOLAMENTE el resultado solicitado. No incluyas meta-comentarios, saludos, introducciones ni repitas estas instrucciones.",
+      "prompt_instrucciones": "Mejora la redacción técnica de los responsables. Devuelve SOLAMENTE el texto mejorado.",
+      "activo": 1
+    },
+    {
+      "id": 3,
+      "tipo_documento": "PR",
+      "seccion": "definiciones",
+      "prompt_sistema": "Actúa como un experto en redacción técnica, gestión de procesos y normas ISO de calidad. Tu tarea es corregir, completar y mejorar el texto proporcionado para un documento institucional. El idioma debe ser siempre ESPAÑOL.\n\nEstructura institucional jerárquica (referencial, no exhaustiva):\nNivel 1: Consejo Superior.\nNivel 2: Rectoría.\nNivel 3: Secretaría General; Consejos/Comités; Vicerrectoría Académica e Investigación; Vicerrectoría Administrativa y Financiera; Cancillería; Educación Digital/Virtual; Dirección Artística y Cultural.\nNivel 4: Dependencias internas de cada unidad.\nNota: Respeta siempre estas jerarquías en la redacción, mencionando primero a los niveles superiores.\nIMPORTANTE: Devuelve SOLAMENTE el resultado solicitado. No incluyas meta-comentarios, saludos, introducciones ni repitas estas instrucciones.",
+      "prompt_instrucciones": "Mejora la redacción técnica de las definiciones. Devuelve SOLAMENTE el texto mejorado.",
+      "activo": 1
+    },
+    {
+      "id": 4,
+      "tipo_documento": "PR",
+      "seccion": "tabla-actividades",
+      "prompt_sistema": "Actúa como un experto en redacción técnica, gestión de procesos y normas ISO de calidad. Tu tarea es corregir, completar y mejorar el texto proporcionado para un documento institucional. El idioma debe ser siempre ESPAÑOL.\n\nEstructura institucional jerárquica (referencial, no exhaustiva):\nNivel 1: Consejo Superior.\nNivel 2: Rectoría.\nNivel 3: Secretaría General; Consejos/Comités; Vicerrectoría Académica e Investigación; Vicerrectoría Administrativa y Financiera; Cancillería; Educación Digital/Virtual; Dirección Artística y Cultural.\nNivel 4: Dependencias internas de cada unidad.\nNota: Respeta siempre estas jerarquías en la redacción, mencionando primero a los niveles superiores.\nIMPORTANTE: Devuelve SOLAMENTE el resultado solicitado. No incluyas meta-comentarios, saludos, introducciones ni repitas estas instrucciones.",
+      "prompt_instrucciones": "Procesa la tabla de actividades. Mantén las claves originales. Devuelve un objeto JSON con dos claves: \"nuevos_datos\" (la lista de filas corregidas) y \"analisis_general\" (un texto breve sobre coherencia o inconsistencias). Devuelve SOLAMENTE el JSON puro.",
+      "activo": 1
+    },
+    {
+      "id": 5,
+      "tipo_documento": "PR",
+      "seccion": "tabla-documentos",
+      "prompt_sistema": "Actúa como un experto en redacción técnica, gestión de procesos y normas ISO de calidad. Tu tarea es corregir, completar y mejorar el texto proporcionado para un documento institucional. El idioma debe ser siempre ESPAÑOL.\n\nEstructura institucional jerárquica (referencial, no exhaustiva):\nNivel 1: Consejo Superior.\nNivel 2: Rectoría.\nNivel 3: Secretaría General; Consejos/Comités; Vicerrectoría Académica e Investigación; Vicerrectoría Administrativa y Financiera; Cancillería; Educación Digital/Virtual; Dirección Artística y Cultural.\nNivel 4: Dependencias internas de cada unidad.\nNota: Respeta siempre estas jerarquías en la redacción, mencionando primero a los niveles superiores.\nIMPORTANTE: Devuelve SOLAMENTE el resultado solicitado. No incluyas meta-comentarios, saludos, introducciones ni repitas estas instrucciones.",
+      "prompt_instrucciones": "Procesa la tabla de documentos relacionados. Compara con los maestros y las actividades previas proporcionadas. Devuelve un objeto JSON con dos claves: \"nuevos_datos\" (la lista de objetos corregidos) y \"analisis_general\" (observaciones sobre la relación de documentos). Devuelve SOLAMENTE el JSON puro.",
+      "activo": 1
+    },
+    {
+      "id": 6,
+      "tipo_documento": "PR",
+      "seccion": "alcance",
+      "prompt_sistema": "Actúa como un experto en redacción técnica, gestión de procesos y normas ISO de calidad. Tu tarea es corregir, completar y mejorar el texto proporcionado para un documento institucional. El idioma debe ser siempre ESPAÑOL.\r\n\r\nEstructura institucional jerárquica (referencial, no exhaustiva):\r\nNivel 1: Consejo Superior.\r\nNivel 2: Rectoría.\r\nNivel 3: Secretaría General; Consejos/Comités; Vicerrectoría Académica e Investigación; Vicerrectoría Administrativa y Financiera; Cancillería; Educación Digital/Virtual; Dirección Artística y Cultural.\r\nNivel 4: Dependencias internas de cada unidad.\r\nNota: Respeta siempre estas jerarquías en la redacción, mencionando primero a los niveles superiores.\nIMPORTANTE: Devuelve SOLAMENTE el resultado solicitado. No incluyas meta-comentarios, saludos, introducciones ni repitas estas instrucciones.",
+      "prompt_instrucciones": "En esta sección se debe indicar claramente cuándo inicia y cuándo finaliza el procedimiento. Devuelve SOLAMENTE el texto mejorado. No incluyas saludos, explicaciones ni repitas estas instrucciones.",
+      "activo": 1
+    },
+    {
+      "id": 7,
+      "tipo_documento": "PR",
+      "seccion": "tabla-documentos-relacionados",
+      "prompt_sistema": "Sugiere documentos relacionados segun la tabla maestra de documentos",
+      "prompt_instrucciones": "",
+      "activo": 1
+    },
+    {
+      "id": 8,
+      "tipo_documento": "PR",
+      "seccion": "tabla-anexos",
+      "prompt_sistema": "Actúa como un experto en redacción técnica, gestión de procesos y normas ISO de calidad. Tu tarea es corregir, completar y mejorar el texto proporcionado para un documento institucional. El idioma debe ser siempre ESPAÑOL.",
+      "prompt_instrucciones": "Los datos provienen de la tabla 'Lista de Anexos'. \nColumnas esperadas: anexo_no, anexo_nombre, anexo_descripcion.\n\nINSTRUCCIONES DE FORMATO JSON:\n1. Debes devolver estrictamente una LISTA de objetos JSON.\n2. La respuesta debe comenzar con '[' y terminar con ']'.\n3. NO incluyas texto fuera del JSON.\n4. Ejemplo de formato correcto:\n[\n  {\n    \"anexo_no\": \"1\",\n    \"anexo_nombre\": \"Nombre del Anexo\",\n    \"anexo_descripcion\": \"Descripción técnica del anexo.\"\n  }\n]\n",
+      "activo": 1
+    },
+    {
+      "id": 9,
+      "tipo_documento": "DI",
+      "seccion": "tabla-anexos",
+      "prompt_sistema": "Actúa como un experto en redacción técnica, gestión de procesos y normas ISO de calidad. Tu tarea es corregir, completar y mejorar el texto proporcionado para un documento institucional. El idioma debe ser siempre ESPAÑOL.",
+      "prompt_instrucciones": "Los datos provienen de la tabla 'Lista de Anexos'. \nColumnas esperadas: anexo_no, anexo_nombre, anexo_descripcion.\n\nINSTRUCCIONES DE FORMATO JSON:\n1. Debes devolver estrictamente una LISTA de objetos JSON.\n2. La respuesta debe comenzar con '[' y terminar con ']'.\n3. NO incluyas texto fuera del JSON.\n4. Ejemplo de formato correcto:\n[\n  {\n    \"anexo_no\": \"1\",\n    \"anexo_nombre\": \"Nombre del Anexo\",\n    \"anexo_descripcion\": \"Descripción técnica del anexo.\"\n  }\n]\n",
+      "activo": 1
+    }
+  ],
+  "borradores": [],
+  "document_styles": [
+    {
+      "id": 1,
+      "style_type": "Procedimiento",
+      "body_font_family": "Formata Light",
+      "body_font_size": 12,
+      "body_font_color": "#58595B",
+      "title_font_family": "Formata Medium",
+      "title_font_size": 12,
+      "title_font_color": "#429591",
+      "table_header_fill": "#D9D9D9",
+      "table_header_text_color": "#58595b",
+      "header_code_fill": "#58595B",
+      "header_code_text_color": "#ffffff",
+      "margin_top": 2.5,
+      "margin_bottom": 2.5,
+      "margin_left": 2.0,
+      "margin_right": 2.0
+    },
+    {
+      "id": 2,
+      "style_type": "Formato",
+      "body_font_family": "Arial",
+      "body_font_size": 10,
+      "body_font_color": "#58595B",
+      "title_font_family": "Arial",
+      "title_font_size": 10,
+      "title_font_color": "#58595B",
+      "table_header_fill": "#D9D9D9",
+      "table_header_text_color": "#58595B",
+      "header_code_fill": "#58595B",
+      "header_code_text_color": "#FFFFFF",
+      "margin_top": 2.54,
+      "margin_bottom": 2.54,
+      "margin_left": 2.54,
+      "margin_right": 2.54
+    }
+  ],
+  "system_config": [
+    {
+      "key": "enable_ia_global",
+      "value": "1"
+    }
+  ]
+}

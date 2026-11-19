@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+{% block title %}Gestión de Usuarios{% endblock %}
+
+{% block content %}
+<div class="content-container">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+        <div>
+            <h2><i class="fas fa-users"></i> Usuarios del Sistema</h2>
+            <p style="color: var(--text-muted);">Administre los accesos y roles de los usuarios.</p>
+        </div>
+        <a href="{{ url_for('admin.crear_usuario') }}" class="btn-primary">
+            <i class="fas fa-user-plus"></i> Nuevo Usuario
+        </a>
+    </div>
+
+    <div class="table-container">
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Usuario</th>
+                    <th>Nombre Completo</th>
+                    <th>Email</th>
+                    <th>Rol</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in usuarios %}
+                <tr>
+                    <td>{{ user['id'] }}</td>
+                    <td><span style="font-weight: 500;">{{ user['username'] }}</span></td>
+                    <td>{{ user['nombre_completo'] or 'N/A' }}</td>
+                    <td>{{ user['email'] or 'N/A' }}</td>
+                    <td>
+                        {% if user['rol'] == 'admin' %}
+                        <span
+                            style="background: #e0e7ff; color: #4338ca; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.8rem; font-weight: 600;">Admin</span>
+                        {% else %}
+                        <span
+                            style="background: #f1f5f9; color: #64748b; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.8rem; font-weight: 600;">User</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if user['activo'] %}
+                        <span style="color: var(--success-color);"><i class="fas fa-check-circle"></i> Activo</span>
+                        {% else %}
+                        <span style="color: var(--danger-color);"><i class="fas fa-times-circle"></i> Inactivo</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        <div class="action-buttons">
+                            <a href="{{ url_for('admin.editar_usuario', id=user['id']) }}" class="btn-icon"
+                                title="Editar">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                            <form action="{{ url_for('admin.eliminar_usuario', id=user['id']) }}" method="post"
+                                style="display:inline;"
+                                onsubmit="return confirm('¿Está seguro de eliminar este usuario?');">
+                                <button type="submit" class="btn-icon delete" title="Eliminar">
+                                    <i class="fas fa-trash-alt"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div style="margin-top: 2rem;">
+        <a href="{{ url_for('menu.admin_menu') }}" class="btn-secondary">
+            <i class="fas fa-arrow-left"></i> Volver al Menú
+        </a>
+    </div>
+</div>
+{% endblock %}

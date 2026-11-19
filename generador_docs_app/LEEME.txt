@@ -1,0 +1,30 @@
+INSTRUCCIONES DE USO
+====================
+
+Para ejecutar esta aplicación en cualquier computador con Windows:
+
+1. REQUISITO PREVIO:
+   Asegúrate de tener Python instalado (versión 3.10 o superior).
+   - Si no lo tienes, descárgalo gratis aquí: https://www.python.org/downloads/
+   - IMPORTANTE: Al instalarlo, marca la casilla que dice "Add Python to PATH".
+
+2. INICIAR LA APLICACIÓN:
+   - Haz doble clic en el archivo "START_APP.bat".
+   - Se abrirá una ventana que verificará el entorno e iniciará el servidor local.
+
+3. ACCEDER AL SISTEMA:
+   - Abre tu navegador web (Chrome, Edge, Firefox, etc.) e ingresa a:
+     http://127.0.0.1:5000
+
+4. CREDENCIALES DE ACCESO (DEMO):
+   - Administrador:
+     * Usuario:    admin
+     * Contraseña: admin123
+   - Usuario estándar:
+     * Usuario:    usuario
+     * Contraseña: user123
+
+NOTA:
+- Para reiniciar o restaurar la base de datos limpia de demostración, ejecuta:
+  python init_db.py
+- Para detener la app, simplemente cierra la ventana del comando.
