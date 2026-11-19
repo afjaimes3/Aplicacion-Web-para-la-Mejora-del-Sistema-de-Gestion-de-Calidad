@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}Crear Proceso{% endblock %}
+
+{% block content %}
+<div class="container" style="max-width: 600px;">
+    <h2 style="margin-bottom: 1.5rem;"><i class="fas fa-plus"></i> Nuevo Proceso</h2>
+
+    <div
+        style="background: var(--surface-color); padding: 2rem; border-radius: var(--radius); box-shadow: var(--shadow); border: 1px solid var(--border-color);">
+        <form method="post">
+            <div class="input-group">
+                <label for="codigo">Código (Ej: GI)</label>
+                <input type="text" name="codigo" id="codigo" maxlength="5" required>
+                <small style="color: var(--text-muted);">Debe ser único. Máximo 5 caracteres.</small>
+            </div>
+
+            <div class="input-group">
+                <label for="nombre">Nombre del Proceso</label>
+                <input type="text" name="nombre" id="nombre" required>
+            </div>
+
+            <div style="display: flex; gap: 1rem; margin-top: 2rem;">
+                <button type="submit" class="btn-primary">
+                    <i class="fas fa-save"></i> Guardar
+                </button>
+                <a href="{{ url_for('admin.gestion_procesos') }}" class="btn-secondary">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

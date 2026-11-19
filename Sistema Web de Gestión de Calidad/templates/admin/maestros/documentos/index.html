@@ -1,0 +1,164 @@
+{% extends 'base.html' %}
+
+{% block title %}Maestro de Documentos{% endblock %}
+
+{% block content %}
+<div class="content-container">
+    <div
+        style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem;">
+        <div>
+            <h2><i class="fas fa-file-invoice"></i> Maestro de Documentos</h2>
+            <p style="color: var(--text-muted);">Gestione el listado maestro de documentos institucionales.</p>
+        </div>
+        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+            <button type="button" class="btn-secondary"
+                onclick="document.getElementById('excel-upload-form').style.display='block'">
+                <i class="fas fa-file-excel"></i> Carga Masiva
+            </button>
+            <a href="{{ url_for('gestion_maestros.crear_documento') }}" class="btn-primary">
+                <i class="fas fa-plus"></i> Nuevo Documento
+            </a>
+        </div>
+    </div>
+
+    <!-- Panel de Carga Masiva (Oculto inicialmente) -->
+    <div id="excel-upload-form"
+        style="display:none; background: #f8fafc; padding: 1.5rem; border-radius: 8px; border: 1px solid #e2e8f0; margin-bottom: 2rem;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem;">
+            <h4 style="margin: 0;"><i class="fas fa-upload"></i> Importar desde Excel</h4>
+            <button type="button" onclick="this.parentElement.parentElement.style.display='none'"
+                style="background:none; border:none; cursor:pointer;"><i class="fas fa-times"></i></button>
+        </div>
+        <p style="font-size: 0.9rem; color: #64748b; margin-bottom: 1rem;">Suba un archivo Excel (.xlsx) con las
+            columnas requeridas (incluyendo url_sharepoint). Puede descargar la plantilla base aquí:</p>
+
+        <div style="display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;">
+            <a href="{{ url_for('gestion_maestros.descargar_plantilla_excel') }}" class="btn-secondary"
+                style="font-size: 0.85rem;">
+                <i class="fas fa-download"></i> Descargar Plantilla
+            </a>
+            <form action="{{ url_for('gestion_maestros.importar_excel') }}" method="post" enctype="multipart/form-data"
+                style="display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap;">
+                <input type="file" name="archivo" accept=".xlsx" required style="font-size: 0.85rem;">
+                <button type="submit" class="btn-primary"
+                    style="font-size: 0.85rem; background-color: #16a34a; border-color: #16a34a;">
+                    <i class="fas fa-check"></i> Subir e Importar
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <div class="table-container" style="overflow-x: auto;">
+        <table class="data-table" style="min-width: 1000px;">
+            <thead>
+                <tr>
+                    <th>Macroproceso</th>
+                    <th>Tipo</th>
+                    <th>Código</th>
+                    <th>Nombre</th>
+                    <th>Proceso</th>
+                    <th>Versión</th>
+                    <th>Caducidad</th>
+                    <th>Responsable</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for doc in documentos %}
+                <tr>
+                    <td><span style="font-size: 0.85rem; color: #64748b;">{{ doc['macroproceso'] or 'N/A' }}</span></td>
+                    <td><span class="badge">{{ doc['tipo_documento'] or 'N/A' }}</span></td>
+                    <td><span style="font-weight: 500;">{{ doc['codigo'] }}</span></td>
+                    <td>{{ doc['nombre'] }}</td>
+                    <td>{{ doc['proceso'] or 'N/A' }}</td>
+                    <td>{{ doc['version_actual'] or '1.0' }}</td>
+                    <td>{{ doc['fecha_caducidad'] or 'N/A' }}</td>
+                    <td><span style="font-size: 0.85rem;">{{ doc['responsable_lider'] or 'N/A' }}</span></td>
+                    <td>
+                        <div class="action-buttons">
+                            {% if doc['url_sharepoint'] %}
+                            <a href="{{ doc['url_sharepoint'] }}" target="_blank" class="btn-icon"
+                                title="Ver en SharePoint" style="color: #0078d4;">
+                                <i class="fas fa-external-link-alt"></i>
+                            </a>
+                            {% endif %}
+                            <a href="{{ url_for('gestion_maestros.editar_documento', id=doc['id']) }}" class="btn-icon"
+                                title="Editar">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                            <form action="{{ url_for('gestion_maestros.eliminar_documento', id=doc['id']) }}"
+                                method="post" style="display:inline;"
+                                onsubmit="return confirm('¿Está seguro de eliminar este documento?');">
+                                <button type="submit" class="btn-icon delete" title="Eliminar">
+                                    <i class="fas fa-trash-alt"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Paginación -->
+    {% if total_pages > 1 %}
+    <div class="pagination-container"
+        style="display: flex; justify-content: center; margin-top: 1.5rem; gap: 0.5rem; flex-wrap: wrap;">
+        {% if page > 1 %}
+        <a href="{{ url_for('gestion_maestros.index_documentos', page=1) }}" class="btn-secondary"
+            style="padding: 0.5rem 0.75rem;">«</a>
+        <a href="{{ url_for('gestion_maestros.index_documentos', page=page-1) }}" class="btn-secondary"
+            style="padding: 0.5rem 0.75rem;">
+            << /a>
+                {% endif %}
+
+                <span
+                    style="padding: 0.5rem 1rem; background: var(--primary-color); color: white; border-radius: 4px; font-weight: 600;">
+                    Página {{ page }} de {{ total_pages }}
+                </span>
+
+                {% if page < total_pages %} <a href="{{ url_for('gestion_maestros.index_documentos', page=page+1) }}"
+                    class="btn-secondary" style="padding: 0.5rem 0.75rem;">>
+        </a>
+        <a href="{{ url_for('gestion_maestros.index_documentos', page=total_pages) }}" class="btn-secondary"
+            style="padding: 0.5rem 0.75rem;">»</a>
+        {% endif %}
+    </div>
+    {% endif %}
+
+    <div style="margin-top: 2rem;">
+        <a href="{{ url_for('menu.admin_menu') }}" class="btn-secondary">
+            <i class="fas fa-arrow-left"></i> Volver al Panel de Administración
+        </a>
+    </div>
+</div>
+
+<style>
+    .badge {
+        background: #f1f5f9;
+        color: #475569;
+        padding: 0.2rem 0.4rem;
+        border-radius: 4px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        border: 1px solid #e2e8f0;
+    }
+
+    @media (max-width: 768px) {
+        .content-container {
+            padding: 1rem;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+        }
+
+        .data-table th,
+        .data-table td {
+            padding: 0.5rem;
+            font-size: 0.9rem;
+        }
+    }
+</style>
+{% endblock %}

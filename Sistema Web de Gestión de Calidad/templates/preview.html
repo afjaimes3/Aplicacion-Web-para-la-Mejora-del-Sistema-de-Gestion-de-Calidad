@@ -1,0 +1,195 @@
+{% extends 'base.html' %}
+
+{% block title %}Resumen del Documento{% endblock %}
+
+{% block content %}
+<div class="content-container">
+    <div style="text-align: center; margin-bottom: 2rem;">
+        <h1>Resumen para Generación</h1>
+        <p>Revise la información antes de generar el archivo Word final.</p>
+    </div>
+
+    <!-- Hoja de vista previa (A4 style) -->
+    <div class="document-preview-paper">
+
+        <!-- Encabezado Falso del documento -->
+        <div style="border: 1px solid black; padding: 10px; margin-bottom: 20px; display: flex; text-align: center;">
+            <div
+                style="width: 20%; border-right: 1px solid black; display: flex; align-items: center; justify-content: center;">
+                <img src="{{ url_for('static', filename='img/logo.svg') }}"
+                    alt="Logo Institucional" style="max-width: 80%; height: auto;">
+            </div>
+            <div
+                style="width: 60%; border-right: 1px solid black; display: flex; flex-direction: column; justify-content: center;">
+                <h3 style="margin: 0; font-size: 12pt;">MACROPROCESO: {{ datos.pro }}</h3>
+                <h3 style="margin: 5px 0 0; font-size: 12pt;">PROCESO: {{ datos.sp }}</h3>
+            </div>
+            <div style="width: 20%; display: flex; flex-direction: column; justify-content: center; font-size: 10pt;">
+                <div>Código: {{ datos.tipod }}</div>
+                <div>Versión: 1</div>
+            </div>
+        </div>
+
+        <h2 style="text-align: center; border:none; margin-top:0;">{{ datos.titulodocumento }}</h2>
+
+        <div class="preview-meta">
+            <div><strong>Tipo:</strong> {{ datos.tipod }}</div>
+            <div><strong>Proceso:</strong> {{ datos.pro }}</div>
+            <div><strong>Subproceso:</strong> {{ datos.sp }}</div>
+            <div><strong>Fecha:</strong> {{ datos.aprobacion.fecha_elaboro }}</div>
+        </div>
+
+        {% if datos.tipod == 'DI' or datos.tipod == 'PR' %}
+        <h2>1. Objetivo</h2>
+        <p>{{ datos.objetivo or 'Sin objetivo definido.' }}</p>
+
+        <h2>2. Alcance</h2>
+        <p>{{ datos.alcance or 'Sin alcance definido.' }}</p>
+
+        <h2>3. PERIODICIDAD</h2>
+        <p>{{ datos.periodicidad or 'Sin periodicidad definida.' }}</p>
+
+        <h2>4. Responsables</h2>
+        <p>{{ datos.responsables or 'Sin responsables definidos.' }}</p>
+
+        <h2>5. NORMATIVA Y POLÍTICAS</h2>
+        <p>{{ datos.normatividad or 'Sin normatividad definida.' }}</p>
+
+        <h2>6. Definiciones</h2>
+        <p>{{ datos.definiciones or 'Sin definiciones.' }}</p>
+
+        <h2>7. Descripción de Actividades</h2>
+        {% if datos.actividades %}
+        <table class="preview-table">
+            <thead>
+                <tr>
+                    <th width="5%">No.</th>
+                    <th width="20%">Responsable</th>
+                    <th>Actividad</th>
+                    <th width="20%">Registro</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for act in datos.actividades %}
+                <tr>
+                    <td>{{ act.No }}</td>
+                    <td>{{ act.Responsable }}</td>
+                    <td>{{ act.Actividad }}</td>
+                    <td>{{ act.Registro }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p><em>No hay actividades registradas.</em></p>
+        {% endif %}
+
+        <h2>8. DOCUMENTOS Y REGISTROS RELACIONADOS</h2>
+        {% if datos.documentos_relacionados %}
+        <table class="preview-table">
+            <thead>
+                <tr>
+                    <th>Tipo Inst.</th>
+                    <th>Nombre</th>
+                    <th>Código</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for doc in datos.documentos_relacionados %}
+                <tr>
+                    <td>{{ doc.documentoinstitucional }}</td>
+                    <td>{{ doc.nombredocumento }}</td>
+                    <td>{{ doc.Codigo1 }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p><em>No hay documentos relacionados.</em></p>
+        {% endif %}
+
+        <h2>9. Lista de Anexos</h2>
+        {% if datos.anexos %}
+        <table class="preview-table">
+            <thead>
+                <tr>
+                    <th>No.</th>
+                    <th>Nombre</th>
+                    <th>Descripción</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for anexo in datos.anexos %}
+                <tr>
+                    <td>{{ anexo.NoA }}</td>
+                    <td>{{ anexo.NombreDocumento }}</td>
+                    <td>{{ anexo.Descripcion }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p><em>No hay anexos.</em></p>
+        {% endif %}
+
+        <h2>10. CONTROL DE VERSIÓN</h2>
+        <table class="preview-table">
+            <thead>
+                <tr>
+                    <th>No.</th>
+                    <th>Identificación</th>
+                    <th>Fecha</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if datos.control_cambios %}
+                {% for cambio in datos.control_cambios %}
+                <tr>
+                    <td>{{ cambio.NoC }}</td>
+                    <td>{{ cambio.IdentificacionC }}</td>
+                    <td>{{ cambio.FechaC }}</td>
+                </tr>
+                {% endfor %}
+                {% else %}
+                <tr>
+                    <td colspan="3">Se generará automáticamente (Versión 1).</td>
+                </tr>
+                {% endif %}
+            </tbody>
+        </table>
+        {% endif %}
+
+
+        <h2>11. APROBACIÓN</h2>
+        <table class="preview-table" style="width: 50%;">
+            <tr>
+                <th style="width: 30%;">Elaboró</th>
+                <td>{{ datos.aprobacion.nombre_elaboro }}</td>
+            </tr>
+            <tr>
+                <th>Cargo</th>
+                <td>{{ datos.aprobacion.cargo_elaboro }}</td>
+            </tr>
+            <tr>
+                <th>Fecha</th>
+                <td>{{ datos.aprobacion.fecha_elaboro }}</td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- Botones Flotantes o fijos al final -->
+    <div class="form-actions"
+        style="justify-content: center; gap: 1rem; position: sticky; bottom: 0; background: white; padding: 1rem; box-shadow: 0 -2px 10px rgba(0,0,0,0.1);">
+
+        <form action="{{ url_for('documents.formulario') }}" method="get" style="display:inline;">
+            <input type="hidden" name="draft_id" value="{{ draft_id }}">
+            <button type="submit" class="btn-secondary"><i class="fas fa-edit"></i> Editar</button>
+        </form>
+
+        <form action="{{ url_for('documents.generar_documento') }}" method="post" style="display:inline;">
+            <input type="hidden" name="draft_id" value="{{ draft_id }}">
+            <button type="submit" class="btn-primary"><i class="fas fa-file-word"></i> Generar Word</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}Editar Proceso{% endblock %}
+
+{% block content %}
+<div class="container" style="max-width: 600px;">
+    <h2 style="margin-bottom: 1.5rem;"><i class="fas fa-edit"></i> Editar Proceso</h2>
+
+    <div
+        style="background: var(--surface-color); padding: 2rem; border-radius: var(--radius); box-shadow: var(--shadow); border: 1px solid var(--border-color);">
+        <form method="post">
+            <div class="input-group">
+                <label>Código</label>
+                <input type="text" value="{{ proceso['codigo'] }}" disabled
+                    style="background-color: #f1f5f9; cursor: not-allowed;">
+                <small style="color: var(--text-muted);">El código no se puede modificar.</small>
+            </div>
+
+            <div class="input-group">
+                <label for="nombre">Nombre del Proceso</label>
+                <input type="text" name="nombre" id="nombre" value="{{ proceso['nombre'] }}" required>
+            </div>
+
+            <div style="display: flex; gap: 1rem; margin-top: 2rem;">
+                <button type="submit" class="btn-primary">
+                    <i class="fas fa-save"></i> Guardar Cambios
+                </button>
+                <a href="{{ url_for('admin.gestion_procesos') }}" class="btn-secondary">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
