@@ -1,7 +1,6 @@
 # Sistema Web de Gestión de Calidad (SGC) con IA
 
 ![Estado](https://img.shields.io/badge/Estado-Prototipo%20Funcional-blue)
-![Norma](https://img.shields.io/badge/Norma-ISO%209001%3A2015-green)
 ![Stack](https://img.shields.io/badge/Stack-Python%20%2F%20Flask%20%2F%20SQLite%20%2F%20Gemini%20%2F%20Power%20BI-orange)
 
 Aplicación web que ayuda a crear, estandarizar y mantener vigentes los documentos de un Sistema de Gestión de la Calidad: procedimientos, instructivos, formatos y documentos institucionales. Incluye formularios guiados, codificación automática, asistencia con IA y generación de archivos Word con el formato de la organización.
