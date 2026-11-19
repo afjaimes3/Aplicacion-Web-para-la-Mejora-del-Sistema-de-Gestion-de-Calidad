@@ -1,129 +1,291 @@
-# Aplicación Web para la Mejora del Sistema de Gestión de Calidad (SGC)
+# Sistema Web de Gestión de Calidad (SGC) con IA
 
-## 1. Descripción del Proyecto y Problemática
+![Estado](https://img.shields.io/badge/Estado-Prototipo%20Funcional-blue)
+![Norma](https://img.shields.io/badge/Norma-ISO%209001%3A2015-green)
+![Stack](https://img.shields.io/badge/Stack-Python%20%2F%20Flask%20%2F%20SQLite%20%2F%20Gemini%20%2F%20Power%20BI-orange)
 
-El **Sistema Web de Gestión de Calidad (SGC)** es un prototipo tecnológico desarrollado para optimizar, estandarizar y controlar el ciclo de vida de la información documentada dentro de la Institución.
+Aplicación web que ayuda a crear, estandarizar y mantener vigentes los documentos de un Sistema de Gestión de la Calidad: procedimientos, instructivos, formatos y documentos institucionales. Incluye formularios guiados, codificación automática, asistencia con IA y generación de archivos Word con el formato de la organización.
 
-### Problemática y Alineación Normativa
+Es un prototipo funcional desarrollado como proyecto de grado, pensado para evaluarse y servir de base a futuros desarrollos.
 
-En la gestión tradicional del SGC, las organizaciones enfrentan frecuentes errores manuales, reprocesos en la redacción de procedimientos y problemas críticos de vigencia documental debido al uso de archivos desactualizados. Para mitigar estas brechas, el sistema asegura el cumplimiento estricto del **numeral 7.5 (Información documentada) de la norma ISO 9001:2015**, garantizando:
+---
 
-* La adecuada creación y actualización de los documentos.
+## Por qué existe
 
-* Su correcta revisión y aprobación mediante una estructura formal.
+En la gestión tradicional de un SGC es común encontrar:
 
-* La disponibilidad, control de acceso y protección de la vigencia en los puntos de uso.
+- Errores al transcribir y dar formato a los documentos a mano.
+- Procedimientos que se rehacen varias veces antes de quedar listos.
+- Documentos que no siguen el manual de identidad de la institución.
+- Versiones antiguas circulando en los puestos de trabajo.
 
-## 2. Funcionalidades y Módulos del Sistema
+La aplicación busca reducir esos problemas centralizando el proceso. Además, apoya el numeral 7.5 de la norma ISO 9001:2015 (información documentada): ayuda a identificar cada documento (código, título, versión y fecha), a mantener un formato normalizado y a controlar accesos y trazabilidad de la elaboración, revisión y aprobación.
 
-La arquitectura funcional de la aplicación se divide en seis módulos principales diseñados para cubrir integralmente la operación del SGC:
+---
 
-1. **Módulo de Autenticación y Perfiles:** Control de acceso seguro basado en credenciales institucionales y asignación de interfaces dinámicas según el rol del usuario.
+## Qué puede hacer
 
-2. **Módulo Listado Maestro de Documentos:** Inventario centralizado con operaciones CRUD completas, búsqueda individual avanzada, control de versionamiento e importación masiva de datos mediante archivos en formato **Microsoft Excel**.
+- **Acceso por roles.** Cada usuario ve únicamente lo que su perfil necesita.
+- **Listado maestro.** Crear, editar, consultar y dar de baja documentos y formatos, con control de fechas y versiones. También se pueden importar y exportar datos en Excel.
+- **Formulario guiado de procedimientos.** El usuario completa el documento por secciones, con validaciones que evitan dejar campos obligatorios vacíos. El sistema genera un `.docx` con tablas, encabezados y pie de página. Los borradores se pueden guardar y retomar después.
+- **Nomenclaturas.** Catálogo de macroprocesos, procesos, subprocesos y tipos de documento, para que los códigos sigan siempre la misma regla.
+- **Asistencia con IA.** Usa Google Gemini para ayudar a redactar objetivos, alcances y definiciones. El administrador puede ajustar los prompts y activar o desactivar la IA, de forma global o por sección. También incluye un configurador de estilos (tipografía, colores y márgenes) y scripts en Python para normalizar borradores antiguos.
+- **Indicadores.** Una API de solo lectura (`/api/bi/*`), protegida con API Key, alimenta tableros de Power BI con vencimientos y métricas por proceso.
 
-3. **Módulo de Generación de Procedimientos:** Formulario guiado estructurado con campos obligatorios para asegurar que cada procedimiento cumpla con la plantilla institucional (objetivo, alcance, descripción de actividades, versión y matrices de aprobación).
+---
 
-4. **Módulo de Gestión de Nomenclaturas:** Administración centralizada de las reglas de codificación y secuencias numéricas por tipo de documento, proceso y subproceso.
+## Roles
 
-5. **Módulo de Estilos e Inteligencia Artificial:** Motor de automatización en **Python** asistido por un **agente de Inteligencia Artificial** para parafrasear, formatear y reestructurar borradores antiguos hacia la identidad visual y normativa oficial.
+| Rol | Permiso | Qué puede hacer |
+|-----|:-------:|-----------------|
+| Administrador | Global (`Admin`) | Administra el listado maestro, hace cargas masivas, gestiona usuarios, nomenclaturas, estilos y parámetros de IA. |
+| Funcionario / Editor | `RW` (`User`) | Crea y edita documentos con los formularios, usa la asistencia de IA y genera archivos `.docx`. |
+| Usuario de consulta | `R` (`Read`) | Consulta documentos aprobados y catálogos. No puede modificarlos. |
 
-6. **Módulo de Indicadores (Power BI):** Cuadro de mando integrado para la visualización del estado de vigencia, vencimientos temporales y análisis analítico por macroproceso.
+La configuración crítica (estilos, nomenclaturas, reglas de negocio y parámetros de IA) está reservada al Administrador.
 
-## 3. Roles y Control de Acceso (RBAC)
+---
 
-El sistema implementa un modelo de control de acceso basado en roles (*Role-Based Access Control* - RBAC) para garantizar la seguridad de la información documentada y evitar la sobreasignación de privilegios:
+## Reglas de codificación
 
-| Rol de Usuario | Código de Permiso | Responsabilidades y Alcance en el Sistema | 
-| ----- | ----- | ----- | 
-| **Administrador** | Global | Acceso total al sistema. Gestiona el Listado Maestro (crear, editar, eliminar), ejecuta cargas masivas mediante Excel, y configura nomenclaturas, reglas de negocio, estilos y parámetros del agente de IA. | 
-| **Funcionario / Editor** | `RW` (Lectura y Escritura) | Acceso a los formularios guiados y herramientas de redacción para la elaboración y actualización de procedimientos y documentos del SGC. | 
-| **Usuario de Consulta** | `R` (Solo Lectura) | Acceso restringido exclusivamente a la visualización y consulta de documentos vigentes dentro del repositorio institucional, sin permisos de modificación. | 
+Cada documento sigue esta estructura:
 
-## 4. Reglas de Negocio y Estandarización Documental
+```text
+[TipoDocumento]-[Proceso]-[Subproceso]-[Consecutivo]
+```
 
-Para mantener la integridad y estandarización del SGC, el sistema aplica rigurosas reglas operativas:
+Por ejemplo, `PR-AS-E-101` se lee así:
 
-### Regla de Codificación Obligatoria
+```text
+PR-AS-E-101
+│  │  │  └── Consecutivo: 101
+│  │  └───── Subproceso: E
+│  └──────── Proceso: AS
+└─────────── Tipo de documento: PR (Procedimiento)
+```
 
-Todo documento generado en el sistema debe seguir de manera estricta la siguiente secuencia alfanumérica:
+Otros ejemplos: `FR-GH-X-002` (formato de Gestión de Talento Humano) e `IN-GT-S-003` (instructivo de Gestión de TI).
 
-$$
-\text{[TipoDocumento]}-\text{[Proceso]}-\text{[Subproceso]}-\text{[Consecutivo]}
-$$
+Algunas convenciones más:
 
-* **Ejemplo práctico:** `PR-AS-E-001` (Procedimiento - Área Administrativa/Apoyo - Estándar - Consecutivo 001).
+- Los códigos de documento van en mayúsculas y con guiones.
+- Las tablas de la base de datos usan `snake_case` (por ejemplo, `lista_documentos`).
+- La interfaz y la documentación están en español.
 
-### Estructura Mínima Exigida en Procedimientos
+Un procedimiento generado por el sistema debe incluir, como mínimo: encabezado institucional con código, versión y paginación; objetivo, alcance, responsables y definiciones; descripción de actividades; documentos y registros relacionados; anexos; control de versiones; y una matriz de firmas para elaboración, revisión y aprobación.
 
-Los documentos de tipo procedimiento deben integrar obligatoriamente:
+Cada cambio (creación, edición o eliminación) se guarda de inmediato en el listado maestro, con su historial de versiones, para que nadie use un documento desactualizado sin darse cuenta.
 
-* Encabezado institucional normalizado con código y versión vigente.
+---
 
-* Tabla de elaboración, revisión y aprobación.
+## Arquitectura y tecnologías
 
-* Cuerpo estructurado (Objetivo, Alcance, Descripción detallada de actividades).
+El backend está organizado en módulos de Flask (Blueprints): `auth`, `document_app`, `maestros`, `admin`, `admin_ia` y `api_bi`. El control de acceso sigue el modelo RBAC.
 
-* Historial de control de cambios.
+| Capa | Tecnología | Para qué se usa |
+|------|-----------|-----------------|
+| Backend | Python 3.10+ con Flask | Lógica de negocio, rutas y módulos. |
+| Base de datos | SQLite | Almacenamiento relacional. La migración a PostgreSQL o MySQL está prevista. |
+| Inteligencia artificial | Google Gemini API (`gemini-1.5-flash`) | Asistencia en la redacción, con control de cuotas, timeouts y limpieza de respuestas. |
+| Documentos Word | `python-docx`, `docx-mailmerge`, `lxml` | Generación y estilizado de archivos `.docx`. |
+| Hojas de cálculo | `pandas`, `openpyxl` | Importación y exportación de maestros en Excel. |
+| Frontend | HTML5, CSS3, JavaScript vanilla, Font Awesome | Interfaz responsive. |
+| Analítica | Microsoft Power BI | Tablero de vigencias conectado a la API. |
+| Repositorio institucional | Microsoft SharePoint | Publicación final de documentos. La integración está en la hoja de ruta. |
+| Entorno de desarrollo | Google Antigravity | IDE basado en agentes, usado para construir el prototipo. |
 
-* Pie de página institucional.
+---
 
-## 5. Arquitectura y Stack Tecnológico
+## Modelo de datos
 
-El desarrollo del prototipo se apoya en un conjunto heterogéneo de tecnologías orientadas a la automatización, la gestión de datos y la inteligencia de negocios:
+```mermaid
+erDiagram
+    PROCESOS ||--o{ SUBPROCESOS : "contiene (1:N)"
+    PROCESOS ||--o{ LISTA_DOCUMENTOS : "agrupa (1:N)"
+    SUBPROCESOS ||--o{ LISTA_DOCUMENTOS : "clasifica (1:N)"
+    TIPOS_DOCUMENTO ||--o{ LISTA_DOCUMENTOS : "define (1:N)"
+    PROCESOS ||--o{ LISTA_FORMATOS : "agrupa (1:N)"
+    USUARIOS ||--o{ BORRADORES : "crea (1:N)"
 
-* **Lenguajes y Lógica Backend:** `Python` para la automatización de procesos, normalización de documentos y soporte lógico de la IA.
+    USUARIOS {
+        int id PK
+        string username UK
+        string password_hash
+        string rol
+        int activo
+    }
+    PROCESOS {
+        string codigo PK
+        string nombre
+        string tipo_proceso
+    }
+    SUBPROCESOS {
+        int id PK
+        string codigo_proceso FK
+        string codigo
+        string nombre
+    }
+    TIPOS_DOCUMENTO {
+        string codigo PK
+        string nombre
+    }
+    LISTA_DOCUMENTOS {
+        int id PK
+        string tipo_doc FK
+        string codigo UK
+        string nombre
+        string proceso FK
+        string subproceso
+        string version
+        date fecha_caducidad
+    }
+    LISTA_FORMATOS {
+        int id PK
+        string codigo UK
+        string nombre
+        string proceso FK
+        string version
+        date fecha_aprobacion
+        date fecha_caducidad
+        string estado
+    }
+    BORRADORES {
+        int id PK
+        int user_id FK
+        text content
+        datetime updated_at
+    }
+```
 
-* **Entorno de Desarrollo:** `Google Antigravity` (IDE basado en agentes y metodología de *Vibe Coding* e Ingeniería de Instrucciones).
+- `lista_documentos`: el listado maestro (identidad, título, versión, vigencia y responsable).
+- `lista_formatos`: estructura y metadatos de las plantillas de formatos.
+- `tipos_documento`: procedimientos, instructivos, formatos y documentos institucionales.
+- `procesos` y `subprocesos`: la jerarquía de macroprocesos y procesos.
+- `usuarios` y `borradores`: cuentas con su rol y los borradores de cada usuario.
 
-* **Asistencia Inteligente:** Agente de Inteligencia Artificial integrado para la asistencia en la redacción y estructuración normativa.
+También existe una tabla `document_styles` con la configuración visual de los documentos.
 
-* **Base de Datos y Almacenamiento:** Base de datos relacional `SQL` para el almacenamiento estructurado del Listado Maestro *(motor específico pendiente de definición en DDL final)*.
+---
 
-* **Visualización e Inteligencia de Negocios:** `Microsoft Power BI` para la analítica de vigencias y tableros de control gerencial.
+## Flujo de trabajo
 
-## 6. Modelo de Datos (Esquema ERD)
+1. El área usuaria inicia un documento y el sistema valida su codificación.
+2. La persona completa el formulario por secciones, y si lo necesita, pide ayuda a la IA para redactar.
+3. El sistema revisa los campos obligatorios y aplica los estilos, tablas y márgenes.
+4. Se genera el Word y el documento queda registrado en el listado maestro.
+5. Los borradores antiguos pueden normalizarse con los scripts de Python y el agente de IA.
+6. La API de Power BI toma la información para mostrar vencimientos, alertas y métricas por proceso.
 
-El modelo relacional subyacente está compuesto por seis entidades principales con relaciones de tipo $1:N$:
+---
 
-1. **`lista_documentos`**: Tabla central del Listado Maestro. Almacena identidad, título, versión, estado de vigencia y metadatos de los documentos.
+## Instalación y ejecución
 
-2. **`lista_formatos`**: Almacena estructuras, metadatos y registros específicos de las plantillas institucionales.
+**Requisitos:** Python 3.10 o superior. Internet solo si vas a usar la integración con Gemini.
 
-3. **`tipos_documento`**: Catálogo maestro de clasificaciones (Procedimientos, Instructivos, Formatos, etc.).
+**1. Clona el repositorio y entra a la carpeta:**
 
-4. **`procesos`**: Tabla maestra de macroprocesos institucionales (Estratégicos, Misionales, de Apoyo, Calidad).
+```bash
+git clone <URL_DEL_REPOSITORIO>
+cd generador_docs_app
+```
 
-5. **`subprocesos`**: Clasificación específica vinculada a cada proceso organizacional.
+**2. Crea y activa un entorno virtual:**
 
-6. **`usuarios` / `perfiles`**: Registro de usuarios y asignación de permisos según la matriz RBAC.
+```bash
+# Windows
+python -m venv .venv
+.venv\Scripts\activate
 
-### Relaciones Clave (Foreign Keys)
+# Linux / macOS
+python3 -m venv .venv
+source .venv/bin/activate
+```
 
-* `procesos` (1) $\rightarrow$ `subprocesos` ($N$)
+**3. Instala las dependencias:**
 
-* `tipos_documento` (1) $\rightarrow$ `lista_documentos` ($N$)
+```bash
+pip install -r requirements.txt
+```
 
-* `subprocesos` (1) $\rightarrow$ `lista_documentos` ($N$)
+**4. Configura las variables de entorno.** Copia la plantilla y edítala con tus propios valores:
 
-## 7. Flujos de Trabajo Principales
+```bash
+# Windows
+copy .env.example .env
 
-1. **Elaboración Guiada:** El usuario inicia una solicitud; el sistema asigna el código estandarizado (`[TipoDocumento]-[Proceso]-[Subproceso]-[Consecutivo]`) y despliega el formulario estructurado.
+# Linux / macOS
+cp .env.example .env
+```
 
-2. **Normalización por IA:** Los borradores o archivos antiguos se procesan mediante scripts en Python y el agente de IA para adecuarlos a la identidad visual del SGC.
+```env
+SECRET_KEY=cambiar_por_una_clave_segura
+POWERBI_API_KEY=cambiar_por_una_clave_para_power_bi
+AI_API_KEY=tu_api_key_de_gemini
+AI_BASE_URL=https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent
+AI_MODEL=gemini-1.5-flash
+```
 
-3. **Control de Cambios y Publicación:** Tras la aprobación, la información se actualiza de forma inmediata en el Listado Maestro.
+No subas el archivo `.env` al repositorio.
 
-4. **Monitoreo Temporal:** Power BI consume los datos del sistema para reflejar alertas de vencimiento y el estado actual de la vigencia documental.
+**5. Inicializa la base de datos.** Este paso crea las tablas y carga los datos iniciales (usuarios de demostración, nomenclaturas y estilos predeterminados):
 
-## 8. Estado Actual y Hoja de Ruta (Roadmap)
+```bash
+python init_db.py
+```
 
-Este repositorio corresponde a la **memoria técnica y prototipo funcional** validado en el marco de un proyecto de grado. Al no incluir manifiestos crudos de dependencias (`package.json` / `requirements.txt`), variables de entorno (`.env`) ni scripts CLI explícitos en esta fase conceptual, se establecen las siguientes recomendaciones técnicas para llevar el prototipo a un entorno de producción:
+**6. Ejecuta la aplicación:**
 
-1. **Definición de Base de Datos (DDL):** Consolidar los esquemas relacionales finales en motores como PostgreSQL o MySQL garantizando las llaves foráneas descritas en el ERD.
+```bash
+python main.py
+```
 
-2. **Manifiestos y Dependencias:** Configurar los archivos de dependencias (`requirements.txt` para Python / `package.json` para Node.js según corresponda).
+Después abre `http://127.0.0.1:5000` en tu navegador.
 
-3. **Variables de Entorno:** Centralizar credenciales sensibles (como `DATABASE_URL`, claves de API de la IA y `SHAREPOINT_SITE_ID`) en un archivo seguro `.env`.
+En Windows también puedes usar `START_APP.bat`, que revisa el entorno virtual, instala lo que falte y levanta el servidor.
 
-4. **Modularización del Código:** Estructurar formalmente las carpetas de controladores, modelos y rutas en un entorno MVC o de servicios desacoplados.
+### Usuarios de demostración
+
+`init_db.py` crea dos cuentas de prueba, una de Administrador y otra de Usuario, para que puedas explorar la aplicación. Son solo para uso local. Cámbialas o elimínalas antes de desplegar.
+
+---
+
+## Estructura del proyecto
+
+```
+generador_docs_app/
+├── main.py                 # Punto de entrada Flask y rutas del menú
+├── auth.py                 # Autenticación, sesiones y decoradores RBAC
+├── document_app.py         # Formulario guiado, IA y ensamblador Word
+├── maestros.py             # Listado maestro (CRUD y carga masiva en Excel)
+├── admin.py                # Usuarios, roles, nomenclaturas y estilos
+├── admin_ia.py             # Configuración de prompts y directivas de IA
+├── api_bi.py               # API REST protegida para Power BI
+├── standardizer_tool.py    # Normalización de formatos documentales
+├── init_db.py              # Creación e inicialización de la base de datos
+├── db.py                   # Conexión centralizada a SQLite
+├── static/                 # CSS, JavaScript e imágenes
+├── templates/              # Plantillas Jinja2 (login, formularios, admin, menús)
+├── plantillas_descargas/   # Plantillas Word descargables
+├── utils/                  # Formateadores de Word (procedimientos, formatos, XML)
+├── requirements.txt        # Dependencias de Python
+├── .env.example            # Plantilla de variables de entorno
+└── README.md
+```
+
+---
+
+## Estado del proyecto y próximos pasos
+
+Es un prototipo funcional de alta fidelidad, desarrollado como proyecto de grado. Incluye las pantallas, los flujos, el modelo de datos, la generación de Word y las integraciones con Gemini y Power BI.
+
+Para llevarlo a producción, los pasos recomendados son:
+
+1. Migrar de SQLite a PostgreSQL o MySQL, con SQLAlchemy y Alembic para las migraciones.
+2. Desplegar con Gunicorn o uWSGI detrás de Nginx, con HTTPS.
+3. Contenerizar con Docker (`Dockerfile` multi-stage y `docker-compose.yml`).
+4. Integrar la publicación de documentos con SharePoint mediante su API. También se podría usar Google Drive o Amazon S3.
+5. Mover la generación de documentos extensos e importaciones masivas a tareas asíncronas, con Celery y Redis.
+6. Reemplazar las credenciales de demostración, sacar los secretos del código y documentar el mecanismo de sesión.
+7. Definir el DDL SQL final y documentar los endpoints HTTP.
+
+---
